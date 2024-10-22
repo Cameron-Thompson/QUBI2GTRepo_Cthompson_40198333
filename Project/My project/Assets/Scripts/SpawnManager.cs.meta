@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 0bf5f07106baf7a498e4f700e6f4907e
+guid: df7269bb1ca05a7408f0239106456a49
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - projectilePrefab: {fileID: 2147895002730076875, guid: 12ec307e4794d5343818153e0717ee71, type: 3}
+  - player: {instanceID: 0}
+  - zombie: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
