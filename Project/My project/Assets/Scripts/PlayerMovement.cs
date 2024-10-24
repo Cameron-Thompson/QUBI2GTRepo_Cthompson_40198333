@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float shotCooldown = 0.2f; // 2 seconds between shots
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
+
     void Start()
     {
 
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             lastShotTime = Time.time;
+
         }
     }
 }
