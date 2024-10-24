@@ -1836,6 +1836,7 @@ GameObject:
   - component: {fileID: 6144672688457758511}
   - component: {fileID: 8386835156945265263}
   - component: {fileID: -8366203448606325229}
+  - component: {fileID: -6147708296396921274}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Zombie
@@ -1913,8 +1914,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4260973, y: 2.1988356, z: 1}
-  m_Center: {x: 0.01664853, y: 0.59941375, z: 2.2060423e-11}
+  m_Size: {x: 1.4260973, y: 1.1744306, z: 1}
+  m_Center: {x: 0.01664853, y: 1.1116095, z: 2.2060423e-11}
 --- !u!114 &6144672688457758511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,6 +1954,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!54 &-6147708296396921274
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248044391638715078}
+  serializedVersion: 4
+  m_Mass: 10
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5303372305794714199
 GameObject:
   m_ObjectHideFlags: 0

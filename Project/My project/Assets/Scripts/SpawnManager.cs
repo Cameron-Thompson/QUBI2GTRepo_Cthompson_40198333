@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private float spawnRangeX = 120;
+    private float spawnRangeX = 57;
     private float spawnPosZ;
     private float startDelay = 2;
-    private float spawnInterval = 2.5f;
+    private float spawnInterval = 1.5f;
     public GameObject player;
     public GameObject zombie;
 
@@ -25,9 +25,9 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnZombie()
     {
-        spawnPosZ = player.transform.position.z + 500;
+        spawnPosZ = player.transform.position.z + 400;
 
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX/2, spawnRangeX/2), 0, spawnPosZ);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
 
         Instantiate(zombie, spawnPos, zombie.transform.rotation);
     }
