@@ -10,9 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public float shotCooldown = 0.2f; // 2 seconds between shots
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
+    private Animator playerAnim;
+    public AudioClip gameOver;
+    private AudioSource playerAudio;
+
 
     void Start()
     {
+        playerAnim = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
 
     }
 
@@ -31,6 +37,17 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             lastShotTime = Time.time;
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Zombie")
+        {
+            Debug.Log("Game Over");
+            playerAnim.SetBool("DeadPlayer_b", true);
+            playerAudio.PlayOneShot(gameOver, 1.0f);
+            forwardMovementSpeed = 0;
         }
     }
 }
