@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Zombie
   - Bullet
+  - Road
   layers:
   - Default
   - TransparentFX

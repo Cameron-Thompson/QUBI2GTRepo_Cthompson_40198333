@@ -7,11 +7,12 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeX = 120;
     private float spawnPosZ;
     private float startDelay = 2;
-    private int spawnInterval = 500;
+    private int spawnInterval = 250;
     public float spawnIntervalCurrent = 0;
 
-    public GameObject player;
     public GameObject zombie;
+    private GameObject playerObj = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +22,22 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(spawnIntervalCurrent);
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+
         if (spawnIntervalCurrent == spawnInterval)
         {
-            SpawnZombie();
+            SpawnZombie(playerObj.transform.position.z);
             spawnIntervalCurrent = 0;
         }
         else 
         { 
-            spawnIntervalCurrent += 5;
+            spawnIntervalCurrent += 1;
         }
     }
 
-    void SpawnZombie()
+    void SpawnZombie(float playerPositionZ)
     {
-        spawnPosZ = player.transform.position.z + 500;
-        Debug.Log(spawnPosZ);
+        spawnPosZ = playerPositionZ + 500;
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX/2, spawnRangeX/2), 0, spawnPosZ);
         Instantiate(zombie, spawnPos, zombie.transform.rotation);
     }
