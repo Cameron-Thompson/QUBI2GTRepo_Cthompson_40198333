@@ -573,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 6151749347745091517}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4.34, y: 0, z: 0}
+  m_LocalPosition: {x: -4.34, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -814,10 +814,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf5f07106baf7a498e4f700e6f4907e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
+  speed: 60
   horizontalInput: 0
   projectilePrefab: {fileID: 2147895002730076875, guid: 12ec307e4794d5343818153e0717ee71, type: 3}
-  shotCooldown: 2
+  shotCooldown: 0.5
+  forwardMovementSpeed: 20
 --- !u!65 &955184771971561723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -837,8 +838,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.6633601, z: 1}
+  m_Center: {x: 0, y: 1.6120493, z: 0}
 --- !u!54 &-479622951449762054
 Rigidbody:
   m_ObjectHideFlags: 0
