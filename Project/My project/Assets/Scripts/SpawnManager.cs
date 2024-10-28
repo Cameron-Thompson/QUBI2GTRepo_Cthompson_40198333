@@ -5,13 +5,18 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private float spawnRangeX = 40;
+    private float spawnRangeXBarricade = 30;
     private float spawnPosZ;
     private float startDelay = 2;
-    private int spawnInterval = 250;
-    public float spawnIntervalCurrent = 0;
+    private int spawnInterval = 60;
+    private int spawnIntervalBarricade = 4000;
 
+    public int spawnIntervalCurrent = 0;
+    private int spawnIntervalCurrentBar = 0;
+    public GameObject barricade;
     public GameObject zombie;
     private GameObject playerObj = null;
+    private Animator playerAnim;
 
 
     // Start is called before the first frame update
@@ -23,22 +28,37 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
+        playerAnim = playerObj.GetComponent<Animator>();
 
-        if (spawnIntervalCurrent == spawnInterval)
+        if (spawnIntervalCurrent == spawnInterval && playerAnim.GetBool("DeadPlayer_b") == false)
         {
             SpawnZombie(playerObj.transform.position.z);
             spawnIntervalCurrent = 0;
         }
+        else if(spawnIntervalBarricade == spawnIntervalCurrentBar && playerAnim.GetBool("DeadPlayer_b") == false)
+        {
+            Debug.Log("Spawn barricade");
+            SpawnBarricade(playerObj.transform.position.z);
+            spawnIntervalCurrentBar = 0;
+        }
         else 
         { 
             spawnIntervalCurrent += 1;
+            spawnIntervalCurrentBar += 1;
         }
     }
 
     void SpawnZombie(float playerPositionZ)
     {
-        spawnPosZ = playerPositionZ + 500;
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX/2, spawnRangeX/2), 0, spawnPosZ);
+        spawnPosZ = playerPositionZ + 300;
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
         Instantiate(zombie, spawnPos, zombie.transform.rotation);
+    }
+
+    void SpawnBarricade(float playerPositionZ)
+    {
+        spawnPosZ = playerPositionZ + 200;
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0, spawnPosZ);
+        Instantiate(barricade, spawnPos, barricade.transform.rotation);
     }
 }

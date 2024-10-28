@@ -18,11 +18,14 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade")
         {
-            Debug.Log("this shouldn't happen to a player");
             Destroy(gameObject);
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Barricade")
+        {
+            Destroy(gameObject);
         }
     }
 

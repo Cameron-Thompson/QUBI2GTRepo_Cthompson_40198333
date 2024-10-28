@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 20.0f;
     public float horizontalInput;
     public GameObject projectilePrefab;
-    public float shotCooldown = 0.2f; // 2 seconds between shots
+    public float shotCooldown = 0.02f; // 0.02 seconds between shots
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
     private Animator playerAnim;
@@ -58,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Zombie")
+        {
+            Debug.Log("Game Over");
+            playerAnim.SetBool("DeadPlayer_b", true);
+        }
+        else if (other.gameObject.tag == "Barricade")
         {
             Debug.Log("Game Over");
             playerAnim.SetBool("DeadPlayer_b", true);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyOutOfBounds : MonoBehaviour
 {
-    private float offsetUpperBound = 400;
+    private float offsetUpperBound = 200;
     private float offsetLowerBoundZombie = 70;
     private float offsetLowerBoundRoad = 500;
     private GameObject player; 
@@ -23,6 +23,10 @@ public class DestroyOutOfBounds : MonoBehaviour
             Destroy(gameObject);
         }
         else if (transform.position.z < player.transform.position.z - offsetLowerBoundZombie && gameObject.tag == "Zombie")
+        {
+            Destroy(gameObject);
+        }
+        else if (transform.position.z < player.transform.position.z - offsetLowerBoundZombie && gameObject.tag == "Barricade")
         {
             Destroy(gameObject);
         }

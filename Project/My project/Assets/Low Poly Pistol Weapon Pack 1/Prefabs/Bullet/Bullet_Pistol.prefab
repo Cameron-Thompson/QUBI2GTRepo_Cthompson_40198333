@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1622dfa4dc8db6049a49dfe44ac3b774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6753555226237449553, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
 --- !u!114 &985089571859221539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +145,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8416928, y: 0.9719031, z: 2.04}
-  m_Center: {x: 0, y: -0.000000074505806, z: -0.54}
+  m_Size: {x: 0.8416928, y: 0.9719031, z: 2.1910875}
+  m_Center: {x: 0, y: -0.000000059604645, z: -0.4644562}
 --- !u!54 &1825995190541337491
 Rigidbody:
   m_ObjectHideFlags: 0
