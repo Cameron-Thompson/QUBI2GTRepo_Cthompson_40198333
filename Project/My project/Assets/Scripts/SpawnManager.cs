@@ -8,8 +8,8 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeXBarricade = 30;
     private float spawnPosZ;
     private float startDelay = 2;
-    private int spawnInterval = 60;
-    private int spawnIntervalBarricade = 4000;
+    private int spawnInterval = 10;
+    private int spawnIntervalBarricade = 250;
 
     public int spawnIntervalCurrent = 0;
     private int spawnIntervalCurrentBar = 0;
@@ -22,8 +22,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Limit framerate to cinematic 24fps.
+        QualitySettings.vSyncCount = 0; // Set vSyncCount to 0 so that using .targetFrameRate is enabled.
+        Application.targetFrameRate = 60;
     }
-
     // Update is called once per frame
     void Update()
     {

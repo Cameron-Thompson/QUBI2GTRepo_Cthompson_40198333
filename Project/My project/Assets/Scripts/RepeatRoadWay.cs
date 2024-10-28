@@ -30,7 +30,7 @@ public class RepeatRoadWay : MonoBehaviour
 
     void CreateRoad(float playerPositionZ)
     {
-        float spawnPosZ = playerPositionZ + 338f;
+        float spawnPosZ = playerPositionZ + 336f;
         Vector3 spawnPos = new Vector3(0, 0, spawnPosZ);
         Instantiate(Road, spawnPos, Road.transform.rotation);
     }
