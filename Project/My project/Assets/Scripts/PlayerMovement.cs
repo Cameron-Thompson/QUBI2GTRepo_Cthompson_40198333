@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnim;
     public AudioClip gameOver;
     private AudioSource playerAudio;
+    private float Xboundary = 40;
 
 
     void Start()
@@ -31,6 +32,16 @@ public class PlayerMovement : MonoBehaviour
         // Get horizontal input and move the player horizontally
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        if (transform.position.x < -Xboundary)
+        {
+            transform.position = new Vector3(-Xboundary, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x > Xboundary)
+        {
+            transform.position = new Vector3(Xboundary, transform.position.y, transform.position.z);
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown)
         {
