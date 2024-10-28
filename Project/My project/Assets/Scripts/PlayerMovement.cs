@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource playerAudio;
     private float Xboundary = 40;
     public static int deadZombies = 0;
-
+    public GameOverScreen gameOverScreen;
     void Start()
     {
         playerAnim = GetComponent<Animator>();
@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         if (playerAnim.GetBool("DeadPlayer_b") == true)
         {
             forwardMovementSpeed = 0;
+            Debug.Log(deadZombies);
+            gameOverScreen.Setup(deadZombies);
         }
     }
 

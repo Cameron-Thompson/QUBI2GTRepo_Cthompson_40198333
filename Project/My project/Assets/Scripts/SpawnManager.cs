@@ -9,8 +9,8 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosZ;
 
     // Spawn intervals in seconds
-    private float spawnInterval = 0.3f;            // Adjust this value as needed
-    private float spawnIntervalBarricade = 3.0f;  // Adjust this value as needed
+    private float spawnInterval = 0.2f;            // Adjust this value as needed
+    private float spawnIntervalBarricade = 10.0f;  // Adjust this value as needed
 
     private float spawnTimer = 0f;
     private float spawnTimerBarricade = 0f;
@@ -62,14 +62,14 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnZombie(float playerPositionZ)
     {
-        spawnPosZ = playerPositionZ + 300f;
+        spawnPosZ = playerPositionZ + 200f;
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0f, spawnPosZ);
         Instantiate(zombie, spawnPos, zombie.transform.rotation);
     }
 
     void SpawnBarricade(float playerPositionZ)
     {
-        spawnPosZ = playerPositionZ + 200f;
+        spawnPosZ = playerPositionZ + 300f;
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0f, spawnPosZ);
         Instantiate(barricade, spawnPos, barricade.transform.rotation);
     }

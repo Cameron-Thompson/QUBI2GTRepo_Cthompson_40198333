@@ -17,13 +17,13 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade" && other.gameObject.tag != "Bullet")
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
             PlayerMovement.deadZombies += 1;
         }
-        if (other.gameObject.tag == "Barricade")
+        else if (other.gameObject.tag == "Barricade")
         {
             Destroy(gameObject);
         }
