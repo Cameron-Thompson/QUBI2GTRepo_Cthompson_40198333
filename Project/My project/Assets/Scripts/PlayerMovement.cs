@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnim;
     public AudioClip gameOver;
     private AudioSource playerAudio;
-    private float Xboundary = 40;
+    private float Xboundary = 50;
 
 
     void Start()
