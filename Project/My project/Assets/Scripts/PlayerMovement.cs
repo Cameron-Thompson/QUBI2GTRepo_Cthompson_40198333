@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 20.0f;
@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource playerAudio;
     private float Xboundary = 40;
     public static int deadZombies = 0;
-
 
     void Start()
     {
@@ -44,9 +43,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown && playerAnim.GetBool("DeadPlayer_b") == false)
         {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
+
+            Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
 
             lastShotTime = Time.time;
 

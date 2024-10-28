@@ -818,7 +818,7 @@ MonoBehaviour:
   horizontalInput: 0
   projectilePrefab: {fileID: 2147895002730076875, guid: 12ec307e4794d5343818153e0717ee71, type: 3}
   shotCooldown: 0.5
-  forwardMovementSpeed: 20
+  forwardMovementSpeed: 30
   gameOver: {fileID: 8300000, guid: 24dcf8614800c5644a2921234a23dfb0, type: 3}
 --- !u!65 &955184771971561723
 BoxCollider:
