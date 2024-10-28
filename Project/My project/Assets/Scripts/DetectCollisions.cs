@@ -20,6 +20,7 @@ public class DetectCollisions : MonoBehaviour
     {
         if (other.gameObject.tag != "Player")
         {
+            Debug.Log("this shouldn't happen to a player");
             Destroy(gameObject);
             Destroy(other.gameObject);
         }

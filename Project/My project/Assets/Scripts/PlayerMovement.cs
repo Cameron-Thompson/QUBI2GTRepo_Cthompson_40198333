@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
@@ -49,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
             lastShotTime = Time.time;
 
         }
+
+        if (playerAnim.GetBool("DeadPlayer_b") == true)
+        {
+            forwardMovementSpeed = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,8 +61,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Game Over");
             playerAnim.SetBool("DeadPlayer_b", true);
-            playerAudio.PlayOneShot(gameOver, 1.0f);
-            forwardMovementSpeed = 0;
         }
     }
 }
