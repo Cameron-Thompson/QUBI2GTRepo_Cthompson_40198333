@@ -20,6 +20,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject playerObj = null;
     private Animator playerAnim;
 
+    //TODO implement object pooling to reduce CPU load
+
     void Start()
     {
 

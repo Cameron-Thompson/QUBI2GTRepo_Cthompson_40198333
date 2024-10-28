@@ -15,6 +15,9 @@ public class DetectCollisions : MonoBehaviour
 
     }
 
+    //TODO clean up this method so that there are less game tag check
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade" && other.gameObject.tag != "Bullet")

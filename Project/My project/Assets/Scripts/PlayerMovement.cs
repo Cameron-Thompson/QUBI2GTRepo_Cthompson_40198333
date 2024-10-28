@@ -22,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
     }
-
+    
+    //TODO Move some of this into a game manager type object
+    
     // Update is called once per frame
     void Update()
     {
