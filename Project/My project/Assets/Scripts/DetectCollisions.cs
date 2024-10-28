@@ -5,7 +5,6 @@ using UnityEngine;
 public class DetectCollisions : MonoBehaviour
 {
     // Start is called before the first frame update
-
     void Start()
     {
     }
@@ -22,6 +21,7 @@ public class DetectCollisions : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+            PlayerMovement.deadZombies += 1;
         }
         if (other.gameObject.tag == "Barricade")
         {

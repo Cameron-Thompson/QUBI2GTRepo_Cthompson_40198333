@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnim;
     public AudioClip gameOver;
     private AudioSource playerAudio;
-    private float Xboundary = 50;
+    private float Xboundary = 40;
+    public static int deadZombies = 0;
 
 
     void Start()
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown)
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+
             lastShotTime = Time.time;
 
         }
@@ -59,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Zombie")
         {
-            Debug.Log("Game Over");
+            Debug.Log("Game Over: Dead Zombies "+deadZombies);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
         else if (other.gameObject.tag == "Barricade")
         {
-            Debug.Log("Game Over");
+            Debug.Log("Game Over: Dead Zombies " + deadZombies);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
     }

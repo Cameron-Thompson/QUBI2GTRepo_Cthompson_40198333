@@ -14,12 +14,14 @@ public class RepeatRoadWay : MonoBehaviour
     void Start()
     {
         playerProgress = 300;
+        playerObj = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
+
+
         if (playerObj.transform.position.z > playerProgress) 
         {
             playerProgress += 300;
@@ -30,7 +32,7 @@ public class RepeatRoadWay : MonoBehaviour
 
     void CreateRoad(float playerPositionZ)
     {
-        float spawnPosZ = playerPositionZ + 336f;
+        float spawnPosZ = playerPositionZ + 334f;
         Vector3 spawnPos = new Vector3(0, 0, spawnPosZ);
         Instantiate(Road, spawnPos, Road.transform.rotation);
     }

@@ -4,63 +4,73 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private float spawnRangeX = 40;
-    private float spawnRangeXBarricade = 30;
+    private float spawnRangeX = 40f;
+    private float spawnRangeXBarricade = 30f;
     private float spawnPosZ;
-    private float startDelay = 2;
-    private int spawnInterval = 10;
-    private int spawnIntervalBarricade = 250;
 
-    public int spawnIntervalCurrent = 0;
-    private int spawnIntervalCurrentBar = 0;
+    // Spawn intervals in seconds
+    private float spawnInterval = 0.3f;            // Adjust this value as needed
+    private float spawnIntervalBarricade = 3.0f;  // Adjust this value as needed
+
+    private float spawnTimer = 0f;
+    private float spawnTimerBarricade = 0f;
+
     public GameObject barricade;
     public GameObject zombie;
     private GameObject playerObj = null;
     private Animator playerAnim;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Limit framerate to cinematic 24fps.
-        QualitySettings.vSyncCount = 0; // Set vSyncCount to 0 so that using .targetFrameRate is enabled.
-        Application.targetFrameRate = 60;
+
+        // Cache the player object and animator
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
+        {
+            playerAnim = playerObj.GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
     }
-    // Update is called once per frame
+
     void Update()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
-        playerAnim = playerObj.GetComponent<Animator>();
+        spawnTimer += Time.deltaTime;
+        spawnTimerBarricade += Time.deltaTime;
 
-        if (spawnIntervalCurrent == spawnInterval && playerAnim.GetBool("DeadPlayer_b") == false)
+        if (playerAnim.GetBool("DeadPlayer_b") == true)
+        {
+            return;
+        }
+
+        if (spawnTimer >= spawnInterval)
         {
             SpawnZombie(playerObj.transform.position.z);
-            spawnIntervalCurrent = 0;
+            spawnTimer = 0f;
         }
-        else if(spawnIntervalBarricade == spawnIntervalCurrentBar && playerAnim.GetBool("DeadPlayer_b") == false)
+
+        // Spawn barricade
+        if (spawnTimerBarricade >= spawnIntervalBarricade)
         {
-            Debug.Log("Spawn barricade");
             SpawnBarricade(playerObj.transform.position.z);
-            spawnIntervalCurrentBar = 0;
-        }
-        else 
-        { 
-            spawnIntervalCurrent += 1;
-            spawnIntervalCurrentBar += 1;
+            spawnTimerBarricade = 0f;
         }
     }
 
     void SpawnZombie(float playerPositionZ)
     {
-        spawnPosZ = playerPositionZ + 300;
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
+        spawnPosZ = playerPositionZ + 300f;
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0f, spawnPosZ);
         Instantiate(zombie, spawnPos, zombie.transform.rotation);
     }
 
     void SpawnBarricade(float playerPositionZ)
     {
-        spawnPosZ = playerPositionZ + 200;
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0, spawnPosZ);
+        spawnPosZ = playerPositionZ + 200f;
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0f, spawnPosZ);
         Instantiate(barricade, spawnPos, barricade.transform.rotation);
     }
 }
