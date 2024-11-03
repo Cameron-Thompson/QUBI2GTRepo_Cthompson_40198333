@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveL : MonoBehaviour
 {
     private float speed = 30;
+    //implement public setters so that we can modify the speed
     private PlayerController playerControllerScript;
     private float leftBound = -15;
     // Start is called before the first frame update
