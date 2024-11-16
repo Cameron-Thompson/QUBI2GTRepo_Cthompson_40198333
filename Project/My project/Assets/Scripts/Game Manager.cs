@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private int score;
     public bool isGameActive;
     public GameObject titleScreen;
+    public Button restartButton;
+
 
     void Start()
     {
