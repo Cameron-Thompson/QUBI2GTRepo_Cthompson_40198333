@@ -17,14 +17,17 @@ public class PlayerMovement : MonoBehaviour
     private float Xboundary = 40;
     public static int deadZombies = 0;
     public GameOverScreen gameOverScreen;
+    private GameManager gameManager;
+
     void Start()
     {
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
-    
+
     //TODO Move some of this into a game manager type object
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -61,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(deadZombies);
             gameOverScreen.Setup(deadZombies);
         }
+        else if (gameManager.isGameActive == false)
+        {
+            forwardMovementSpeed = 0;
+        }
+        else if (gameManager.isGameActive == true)
+        {
+            forwardMovementSpeed = 20.0f;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

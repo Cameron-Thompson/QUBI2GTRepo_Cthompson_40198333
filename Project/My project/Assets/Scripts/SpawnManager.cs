@@ -19,11 +19,15 @@ public class SpawnManager : MonoBehaviour
     public GameObject zombie;
     private GameObject playerObj = null;
     private Animator playerAnim;
+    private GameManager gameManager;
+
 
     //TODO implement object pooling to reduce CPU load
 
     void Start()
     {
+                gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
 
         // Cache the player object and animator
         playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -43,7 +47,7 @@ public class SpawnManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         spawnTimerBarricade += Time.deltaTime;
 
-        if (playerAnim.GetBool("DeadPlayer_b") == true)
+        if (playerAnim.GetBool("DeadPlayer_b") == true || gameManager.isGameActive == false)
         {
             return;
         }

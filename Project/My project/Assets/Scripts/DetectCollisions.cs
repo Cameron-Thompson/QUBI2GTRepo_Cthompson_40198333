@@ -5,8 +5,11 @@ using UnityEngine;
 public class DetectCollisions : MonoBehaviour
 {
     // Start is called before the first frame update
+    private GameManager gameManager;
+
     void Start()
     {
+       gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class DetectCollisions : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
             PlayerMovement.deadZombies += 1;
+            gameManager.UpdateScore(1);
         }
         else if (other.gameObject.tag == "Barricade")
         {
