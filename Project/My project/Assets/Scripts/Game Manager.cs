@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI pointsText;
 
-    private int zombiesKilledCount;
+    public int zombiesKilledCount;
     public bool isGameActive;
     public GameObject titleScreen;
     public int difficultySelected;
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         zombiesKilledCount = 0;
         UpdateZombiesKilled(0);
+
         titleScreen.SetActive(false);
     }
 

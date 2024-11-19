@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             forwardMovementSpeed = 0;
             Debug.Log(deadZombies);
-            gameOverScreen.Setup(deadZombies,gameManager.points);
+            gameOverScreen.Setup(gameManager.zombiesKilledCount,gameManager.points);
         }
         else if (gameManager.isGameActive == false)
         {
