@@ -7,11 +7,16 @@ using TMPro;
 public class GameOverScreen : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI deadZombies;
+    public TextMeshProUGUI points;
 
-    public void Setup(int score)
+    public void Setup(int deadZombiesInt,int pointsInt)
     {
+        string deadZombiesString = deadZombiesInt.ToString();
+        string pointsString = pointsInt.ToString();
+
         gameObject.SetActive(true);
-        pointsText.text = score.ToString() + " DEAD ZOMBIES";
+        deadZombies.text = deadZombiesString + " DEAD ZOMBIES";
+        points.text = "TOTAL POINTS: " + pointsString.ToString();
     }
 }

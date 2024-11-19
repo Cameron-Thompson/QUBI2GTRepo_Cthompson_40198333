@@ -28,7 +28,7 @@ public class DetectCollisions : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
             PlayerMovement.deadZombies += 1;
-            gameManager.UpdateScore(1);
+            gameManager.UpdateZombiesKilled(1);
         }
         else if (other.gameObject.tag == "Barricade")
         {

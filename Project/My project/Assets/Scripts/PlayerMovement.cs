@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 20.0f;
+    public float horizontalSpeed = 20.0f;
     public float horizontalInput;
     public GameObject projectilePrefab;
     public float shotCooldown = 0.02f; // 0.02 seconds between shots
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Get horizontal input and move the player horizontally
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * horizontalSpeed);
 
         if (transform.position.x < -Xboundary)
         {
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown && playerAnim.GetBool("DeadPlayer_b") == false)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown/gameManager.difficultySelected && playerAnim.GetBool("DeadPlayer_b") == false)
         {
             Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
 
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             forwardMovementSpeed = 0;
             Debug.Log(deadZombies);
-            gameOverScreen.Setup(deadZombies);
+            gameOverScreen.Setup(deadZombies,gameManager.points);
         }
         else if (gameManager.isGameActive == false)
         {
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (gameManager.isGameActive == true)
         {
-            forwardMovementSpeed = 20.0f;
+            forwardMovementSpeed = 40.0f * gameManager.difficultySelected;
         }
 
     }

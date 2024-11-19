@@ -21,12 +21,11 @@ public class SpawnManager : MonoBehaviour
     private Animator playerAnim;
     private GameManager gameManager;
 
-
     //TODO implement object pooling to reduce CPU load
 
     void Start()
     {
-                gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
 
         // Cache the player object and animator
@@ -52,14 +51,14 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
-        if (spawnTimer >= spawnInterval)
+        if (spawnTimer >= spawnInterval/gameManager.difficultySelected)
         {
-            SpawnZombie(playerObj.transform.position.z);
-            spawnTimer = 0f;
+                SpawnZombie(playerObj.transform.position.z);
+                spawnTimer = 0f;
         }
 
         // Spawn barricade
-        if (spawnTimerBarricade >= spawnIntervalBarricade)
+        if (spawnTimerBarricade >= spawnIntervalBarricade/gameManager.difficultySelected)
         {
             SpawnBarricade(playerObj.transform.position.z);
             spawnTimerBarricade = 0f;

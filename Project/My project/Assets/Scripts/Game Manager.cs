@@ -4,16 +4,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public TextMeshProUGUI scoreText;
-    private int score;
+    public TextMeshProUGUI pointsText;
+
+    private int zombiesKilledCount;
     public bool isGameActive;
     public GameObject titleScreen;
-    public Button restartButton;
-
+    public int difficultySelected;
+    public int points;
 
     void Start()
     {
@@ -26,10 +30,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdateScore(int scoreToAdd)
+    public void UpdateZombiesKilled(int kill)
     {
-        score += scoreToAdd;
-        scoreText.text = "Zombies Killed: " + score;
+        zombiesKilledCount += kill;
+        scoreText.text = "Zombies Killed: " + zombiesKilledCount;
+        UpdatePoints(kill);
+    }
+
+    public void UpdatePoints(int kill)
+    {
+        points += difficultySelected * 5 * kill;
+        pointsText.text = "Points: " + points;
     }
 
     public void RestartGame()
@@ -39,9 +50,10 @@ public class GameManager : MonoBehaviour
 
     public void startGame(int difficulty)
     {
+        difficultySelected = difficulty;
         isGameActive = true;
-        score = 0;
-        UpdateScore(score);
+        zombiesKilledCount = 0;
+        UpdateZombiesKilled(0);
         titleScreen.SetActive(false);
     }
 
