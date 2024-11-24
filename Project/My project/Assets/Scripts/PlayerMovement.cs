@@ -11,19 +11,27 @@ public class PlayerMovement : MonoBehaviour
     public float shotCooldown = 0.02f; // 0.02 seconds between shots
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
+
     private Animator playerAnim;
     public AudioClip gameOver;
+    public AudioClip gunShot;
     private AudioSource playerAudio;
     private float Xboundary = 40;
     public static int deadZombies = 0;
     public GameOverScreen gameOverScreen;
     private GameManager gameManager;
+    private BoxCollider playerDetectCollisions;
 
     void Start()
     {
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        Debug.Log(playerAnim != null ? "Animator assigned" : "Animator is null");
+        Debug.Log(playerAudio != null ? "AudioSource assigned" : "AudioSource is null");
+        Debug.Log(gameManager != null ? "GameManager assigned" : "GameManager is null");
+        Debug.Log(playerDetectCollisions != null ? "BoxCollider assigned" : "BoxCollider is null");
     }
 
     //TODO Move some of this into a game manager type object
@@ -51,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown/gameManager.difficultySelected && playerAnim.GetBool("DeadPlayer_b") == false)
         {
             Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
-
+            playerAudio.PlayOneShot(gunShot, 0.5f);
             Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
 
             lastShotTime = Time.time;
@@ -76,12 +84,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Zombie")
+        if (other.gameObject.tag == "Zombie" || other.gameObject.tag == "BigZombie" && gameManager.isGameActive == true)
         {
+            horizontalSpeed = 0;
+            gameManager.isGameActive = false;
+            gameObject.GetComponent<Collider>().enabled = false;
+            playerAudio.Stop();
+            playerAudio.PlayOneShot(gameOver,1.0f);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
         else if (other.gameObject.tag == "Barricade")
         {
+            horizontalSpeed = 0;
+            gameManager.isGameActive = false;
+            gameObject.GetComponent<Collider>().enabled = false;
+            playerAudio.PlayOneShot(gameOver);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
     }

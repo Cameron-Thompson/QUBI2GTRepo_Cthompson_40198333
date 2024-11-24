@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectCollisions : MonoBehaviour
+public class BoxCollider : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gameManager;

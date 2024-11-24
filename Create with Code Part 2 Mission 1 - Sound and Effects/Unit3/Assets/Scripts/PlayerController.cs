@@ -38,15 +38,13 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(jumpSound, 1.0f);
    
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && isOnGround == false && isDoubleJump == false && !gameOver)
+        else if (Input.GetKeyDown(KeyCode.Space) && isOnGround == false  && !gameOver)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
-            isDoubleJump = true;
             playerAnim.SetTrigger("Jump_trig");
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSound, 1.0f);
-
         }
         //While shift key held down 
         //Double player speed in move left script 
