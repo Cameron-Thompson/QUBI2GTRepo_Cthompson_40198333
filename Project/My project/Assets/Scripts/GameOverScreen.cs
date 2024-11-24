@@ -21,16 +21,24 @@ public class GameOverScreen : MonoBehaviour
         gameObject.SetActive(true);
         deadZombies.text = deadZombiesString + " DEAD ZOMBIES";
         points.text = "TOTAL POINTS: " + pointsString.ToString();
-        if (pointsInt > highScoreVal)
-        {
-            setHighScore(pointsInt);
-        }
+        setHighScore(pointsInt);
+        
     }
 
     public void setHighScore(int pointsInt)
     {
-        highScoreVal = pointsInt;
-        highScore.text = "HIGH SCORE: " + highScoreVal;
+        if (PlayerPrefs.HasKey("SavedHighScore"))
+        {
+            if (pointsInt > PlayerPrefs.GetInt("SavedHighScore"))
+            {
+                PlayerPrefs.SetInt("SavedHighScore", pointsInt);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("SavedHighScore", pointsInt);
+        }
+        highScore.text = "HIGH SCORE: " + PlayerPrefs.GetInt("SavedHighScore");
     }
     
 }
