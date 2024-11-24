@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float shotCooldown = 0.02f; // 0.02 seconds between shots
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
-
+    public ParticleSystem muzzleFlash;
     private Animator playerAnim;
     public AudioClip gameOver;
     public AudioClip gunShot;
@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
             playerAudio.PlayOneShot(gunShot, 0.5f);
             Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
+            muzzleFlash.Play();
+
 
             lastShotTime = Time.time;
 
