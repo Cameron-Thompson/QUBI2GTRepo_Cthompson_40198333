@@ -25,10 +25,29 @@ public class DetectCollisions : MonoBehaviour
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade" && other.gameObject.tag != "Bullet")
         {
+            if ((gameObject.CompareTag("BigZombie") && other.gameObject.tag == "Zombie") || (gameObject.CompareTag("Zombie") && other.gameObject.tag == "BigZombie"))
+            {
+                return;
+            }
+
             Destroy(gameObject);
             Destroy(other.gameObject);
             PlayerMovement.deadZombies += 1;
-            gameManager.UpdateZombiesKilled(1);
+
+            
+
+            if(gameObject.tag != "BigZombie")
+            {
+                Debug.Log("game object tag" + gameObject.tag);
+                Debug.Log("Otherr game object tag" + other.gameObject.tag);
+                Debug.Log("regular zombie dead");
+               gameManager.UpdateZombiesKilled(1,1);
+            }
+            else
+            {
+                Debug.Log("bigs zombie dead");
+                gameManager.UpdateZombiesKilled(1, 5);
+            }
         }
         else if (other.gameObject.tag == "Barricade")
         {

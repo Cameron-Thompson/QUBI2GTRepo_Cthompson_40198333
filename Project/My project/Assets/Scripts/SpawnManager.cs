@@ -17,6 +17,8 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject barricade;
     public GameObject zombie;
+    public GameObject BigZombie;
+
     private GameObject playerObj = null;
     private Animator playerAnim;
     private GameManager gameManager;
@@ -69,7 +71,24 @@ public class SpawnManager : MonoBehaviour
     {
         spawnPosZ = playerPositionZ + 200f;
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0f, spawnPosZ);
-        Instantiate(zombie, spawnPos, zombie.transform.rotation);
+        int randomNumber = Random.Range(0, 30);
+
+        if (gameManager.difficultySelected == 1 && randomNumber == 1)
+        {
+            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+        }
+        else if (gameManager.difficultySelected == 2 && (randomNumber == 1 || randomNumber == 2))
+        {
+            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+        }
+        else if (gameManager.difficultySelected == 3 && (randomNumber == 1 || randomNumber == 2 || randomNumber == 3))
+        {
+            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+        }
+        else
+        {
+            Instantiate(zombie, spawnPos, zombie.transform.rotation);
+        }
     }
 
     void SpawnBarricade(float playerPositionZ)

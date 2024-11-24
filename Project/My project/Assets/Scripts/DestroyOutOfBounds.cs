@@ -22,7 +22,7 @@ public class DestroyOutOfBounds : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (transform.position.z < player.transform.position.z - offsetLowerBoundZombie && gameObject.tag == "Zombie")
+        else if (transform.position.z < player.transform.position.z - offsetLowerBoundZombie && (gameObject.tag == "Zombie" || gameObject.tag == "BigZombie"))
         {
             Destroy(gameObject);
         }

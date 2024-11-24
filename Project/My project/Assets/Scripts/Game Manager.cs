@@ -30,16 +30,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdateZombiesKilled(int kill)
+    public void UpdateZombiesKilled(int kill,int pointsParamScore)
     {
         zombiesKilledCount += kill;
         scoreText.text = "Zombies Killed: " + zombiesKilledCount;
-        UpdatePoints(kill);
+        UpdatePoints(pointsParamScore);
     }
 
-    public void UpdatePoints(int kill)
+    public void UpdatePoints(int pointsParam)
     {
-        points += difficultySelected * 5 * kill;
+        points += difficultySelected * 5 * pointsParam;
         pointsText.text = "Points: " + points;
     }
 
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         pointsText.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(true);
         zombiesKilledCount = 0;
-        UpdateZombiesKilled(0);
+        UpdateZombiesKilled(0, 0);
         titleScreen.SetActive(false);
     }
 

@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         if (playerAnim.GetBool("DeadPlayer_b") == true)
         {
             forwardMovementSpeed = 0;
-            Debug.Log(deadZombies);
             gameOverScreen.Setup(gameManager.zombiesKilledCount,gameManager.points);
         }
         else if (gameManager.isGameActive == false)
@@ -70,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (gameManager.isGameActive == true)
         {
-            forwardMovementSpeed = 40.0f * gameManager.difficultySelected;
+            forwardMovementSpeed = 30.0f * gameManager.difficultySelected;
         }
 
     }
@@ -79,12 +78,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Zombie")
         {
-            Debug.Log("Game Over: Dead Zombies "+deadZombies);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
         else if (other.gameObject.tag == "Barricade")
         {
-            Debug.Log("Game Over: Dead Zombies " + deadZombies);
             playerAnim.SetBool("DeadPlayer_b", true);
         }
     }
