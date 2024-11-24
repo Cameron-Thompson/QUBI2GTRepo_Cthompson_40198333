@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
@@ -52,9 +52,10 @@ public class GameManager : MonoBehaviour
     {
         difficultySelected = difficulty;
         isGameActive = true;
+        pointsText.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
         zombiesKilledCount = 0;
         UpdateZombiesKilled(0);
-
         titleScreen.SetActive(false);
     }
 
