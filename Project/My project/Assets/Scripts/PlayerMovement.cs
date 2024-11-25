@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public GameOverScreen gameOverScreen;
     private GameManager gameManager;
     private BoxCollider playerDetectCollisions;
+    private float shotCooldownModifier;
 
     void Start()
     {
@@ -55,8 +56,16 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(Xboundary, transform.position.y, transform.position.z);
         }
 
+        if (gameManager.difficultySelected == 1)
+        {
+            shotCooldownModifier = 1.5f;
+        }
+        else
+        {
+            shotCooldownModifier = gameManager.difficultySelected;
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown/gameManager.difficultySelected && playerAnim.GetBool("DeadPlayer_b") == false)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastShotTime >= shotCooldown/shotCooldownModifier && playerAnim.GetBool("DeadPlayer_b") == false)
         {
             Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
             playerAudio.PlayOneShot(gunShot, 0.5f);
