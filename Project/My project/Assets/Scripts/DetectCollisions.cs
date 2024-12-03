@@ -6,7 +6,7 @@ public class BoxCollider : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gameManager;
-
+    private ParticleSystem bloodEffect;
     void Start()
     {
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -30,22 +30,25 @@ public class BoxCollider : MonoBehaviour
                 return;
             }
 
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-            PlayerMovement.deadZombies += 1;
-
-            
-
+         
             if(gameObject.tag != "BigZombie")
             {
-                Debug.Log("game object tag" + gameObject.tag);
-                Debug.Log("Otherr game object tag" + other.gameObject.tag);
-                Debug.Log("regular zombie dead");
-               gameManager.UpdateZombiesKilled(1,1);
+                //call blood effect 
+                bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
+                bloodEffect.Play();
+                Destroy(gameObject,0.05f);
+                Destroy(other.gameObject,0.05f);
+                PlayerMovement.deadZombies += 1;
+                gameManager.UpdateZombiesKilled(1,1);
             }
             else
             {
-                Debug.Log("bigs zombie dead");
+                //call blood script?
+                bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
+                bloodEffect.Play();
+                Destroy(gameObject, 0.05f);
+                Destroy(other.gameObject, 0.05f);
+                PlayerMovement.deadZombies += 1;
                 gameManager.UpdateZombiesKilled(1, 5);
             }
         }
