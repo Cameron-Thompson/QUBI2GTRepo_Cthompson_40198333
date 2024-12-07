@@ -4821,6 +4821,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c37ffcb9b2db5047b607bc24b6fa485, type: 3}
   m_PrefabInstance: {fileID: 1255240963}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &780319605
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -52.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4ec40108ad9bf9c46bcc2663cdc635d0, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 963194228}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+--- !u!4 &780319606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a553f87d2f083f44c83e833bc2d99410, type: 3}
+  m_PrefabInstance: {fileID: 780319605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &796523398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5904,11 +5973,11 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99991703, z: -0, w: -0.012881195}
-  m_LocalPosition: {x: 43.4, y: 12.16, z: -206.75}
+  m_LocalPosition: {x: 0.08, y: 7.04, z: 13.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 780319606}
   m_LocalEulerAnglesHint: {x: 0, y: 181.476, z: 0}
 --- !u!1001 &963878472
 PrefabInstance:
@@ -15165,7 +15234,6 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 2068301360}
   - {fileID: 1783515682}
@@ -15203,3 +15271,4 @@ SceneRoots:
   - {fileID: 842345947}
   - {fileID: 1568375677}
   - {fileID: 1177245580}
+  - {fileID: 780319605}
