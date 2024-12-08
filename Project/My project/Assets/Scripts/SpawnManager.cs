@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -22,15 +24,41 @@ public class SpawnManager : MonoBehaviour
     private GameObject playerObj = null;
     private Animator playerAnim;
     private GameManager gameManager;
+    public ObjectPool<GameObject> zombiesPool;
+    public ObjectPool<GameObject> bigZombiesPool;
+    public ObjectPool<GameObject> barricadesPool;
 
     //TODO implement object pooling to reduce CPU load
 
     void Start()
     {
+        zombiesPool = new ObjectPool<GameObject>(() =>
+        {
+            return Instantiate(zombie);
+        }, z => {
+            z.SetActive(true);
+        }, z => {
+            z.SetActive(false);
+        }, z => {
+            Destroy(z);
+        }, true, 40, 50);
+
+
+        bigZombiesPool = new ObjectPool<GameObject>(() =>
+        {
+            return Instantiate(BigZombie);
+        }, bz => {
+            bz.SetActive(true);
+        }, bz => {
+            bz.SetActive(false);
+        }, bz => {
+            Destroy(bz);
+        }, true, 10, 20);
+
+
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
 
-        // Cache the player object and animator
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObj != null)
@@ -59,7 +87,6 @@ public class SpawnManager : MonoBehaviour
                 spawnTimer = 0f;
         }
 
-        // Spawn barricade
         if (spawnTimerBarricade >= spawnIntervalBarricade/gameManager.difficultySelected)
         {
             SpawnBarricade(playerObj.transform.position.z);
@@ -70,31 +97,45 @@ public class SpawnManager : MonoBehaviour
     void SpawnZombie(float playerPositionZ)
     {
         spawnPosZ = playerPositionZ + 200f;
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0f, spawnPosZ);
+        Vector3 spawnPos = new(Random.Range(-spawnRangeX, spawnRangeX), 0f, spawnPosZ);
         int randomNumber = Random.Range(0, 30);
 
         if (gameManager.difficultySelected == 1 && randomNumber == 1)
         {
-            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+            SpawnBigZombie(spawnPos);
         }
         else if (gameManager.difficultySelected == 2 && (randomNumber == 1 || randomNumber == 2))
         {
-            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+            SpawnBigZombie(spawnPos);
         }
         else if (gameManager.difficultySelected == 3 && (randomNumber == 1 || randomNumber == 2 || randomNumber == 3))
         {
-            Instantiate(BigZombie, spawnPos, BigZombie.transform.rotation);
+            SpawnBigZombie(spawnPos);
         }
         else
         {
-            Instantiate(zombie, spawnPos, zombie.transform.rotation);
+            SpawnZombie(spawnPos);
         }
+    }
+
+    private void SpawnZombie(Vector3 spawnPos)
+    {
+        GameObject pooledZombie = zombiesPool.Get();
+        pooledZombie.transform.position = spawnPos;
+        pooledZombie.transform.rotation = zombie.transform.rotation;
+    }
+
+    private void SpawnBigZombie(Vector3 spawnPos)
+    {
+        GameObject pooledBigZombie = bigZombiesPool.Get();
+        pooledBigZombie.transform.position = spawnPos;
+        pooledBigZombie.transform.rotation = BigZombie.transform.rotation;
     }
 
     void SpawnBarricade(float playerPositionZ)
     {
         spawnPosZ = playerPositionZ + 300f;
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0f, spawnPosZ);
+        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0f, spawnPosZ);
         Instantiate(barricade, spawnPos, barricade.transform.rotation);
     }
 }

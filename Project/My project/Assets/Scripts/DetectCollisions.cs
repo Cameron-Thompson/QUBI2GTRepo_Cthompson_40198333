@@ -6,10 +6,12 @@ public class BoxCollider : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gameManager;
+    private SpawnManager spawnManager;
     private ParticleSystem bloodEffect;
     void Start()
     {
        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+       spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -23,39 +25,55 @@ public class BoxCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Barricade" && other.gameObject.tag != "Bullet")
+        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet"))
         {
-            if ((gameObject.CompareTag("BigZombie") && other.gameObject.tag == "Zombie") || (gameObject.CompareTag("Zombie") && other.gameObject.tag == "BigZombie"))
+            if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) || (gameObject.CompareTag("Zombie") && other.gameObject.CompareTag("BigZombie")))
             {
                 return;
             }
 
-         
-            if(gameObject.tag != "BigZombie")
+            if (!gameObject.CompareTag("BigZombie"))
             {
-                //call blood effect 
-                bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
-                bloodEffect.Play();
-                Destroy(gameObject,0.05f);
-                Destroy(other.gameObject,0.05f);
-                PlayerMovement.deadZombies += 1;
-                gameManager.UpdateZombiesKilled(1,1);
+                HandleZombieKill(other,true,gameObject);
+                gameManager.UpdateZombiesKilled(1, 1);
             }
             else
             {
-                //call blood script?
-                bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
-                bloodEffect.Play();
-                Destroy(gameObject, 0.05f);
-                Destroy(other.gameObject, 0.05f);
-                PlayerMovement.deadZombies += 1;
+                HandleZombieKill(other,false,gameObject);
                 gameManager.UpdateZombiesKilled(1, 5);
             }
         }
-        else if (other.gameObject.tag == "Barricade")
+        else if (other.gameObject.CompareTag("Barricade"))
         {
             Destroy(gameObject);
         }
+    }
+
+
+    private void HandleZombieKill(Collider other, bool isBigZombie,GameObject bullet)
+    {
+        bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
+        bloodEffect?.Play();
+        ReleaseZombieAfterDelay(other.gameObject, 0.05f, isBigZombie, bullet);
+    }
+    private void ReleaseZombieAfterDelay(GameObject zombie, float delay, bool isBigZombie,GameObject bullet)
+    {
+        StartCoroutine(ReleaseAfterDelayCoroutine(zombie, delay, isBigZombie,bullet));
+    }
+
+    private IEnumerator ReleaseAfterDelayCoroutine(GameObject zombie, float delay, bool isBigZombie, GameObject bullet)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (isBigZombie)
+        {
+            spawnManager.bigZombiesPool.Release(zombie);
+        }
+        else
+        {
+            spawnManager.zombiesPool.Release(zombie);
+        }
+        Destroy(bullet);
     }
 
 }
