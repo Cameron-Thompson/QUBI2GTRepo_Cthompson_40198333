@@ -14,22 +14,27 @@ public class BoxCollider : MonoBehaviour
        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
-
-    //TODO clean up this method so that there are less game tag check
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet"))
         {
-            if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) || (gameObject.CompareTag("Zombie") && other.gameObject.CompareTag("BigZombie")))
+            if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) )
             {
+                //release into pool and stops zombie on zombie collissions
+                spawnManager.bigZombiesPool.Release(gameObject);
+                spawnManager.zombiesPool.Release(other.gameObject);
                 return;
+            }
+            else if (gameObject.CompareTag("Zombie") && other.gameObject.CompareTag("BigZombie"))
+            {
+                spawnManager.bigZombiesPool.Release(other.gameObject);
+                spawnManager.zombiesPool.Release(gameObject);
             }
 
             if (!gameObject.CompareTag("BigZombie"))

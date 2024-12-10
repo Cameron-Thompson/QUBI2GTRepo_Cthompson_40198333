@@ -103,14 +103,17 @@ public class PlayerMovement : MonoBehaviour
             playerAudio.Stop();
             playerAudio.PlayOneShot(gameOver,1.0f);
             playerAnim.SetBool("DeadPlayer_b", true);
+            playerAnim.SetBool("DeadPlayerZombie_b", true);
         }
         else if (other.gameObject.tag == "Barricade")
         {
             horizontalSpeed = 0;
             gameManager.isGameActive = false;
             gameObject.GetComponent<Collider>().enabled = false;
+            playerAudio.Stop();
             playerAudio.PlayOneShot(gameOver);
             playerAnim.SetBool("DeadPlayer_b", true);
+            playerAnim.SetBool("DeadPlayerBarricade_b", true);
         }
     }
 }
