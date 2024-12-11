@@ -62,7 +62,7 @@ public class BoxCollider : MonoBehaviour
     {
         bloodEffect = other.gameObject.GetComponent<ParticleSystem>();
         bloodEffect?.Play();
-        ReleaseZombieAfterDelay(other.gameObject, 0.05f, isBigZombie, bullet);
+        ReleaseZombieAfterDelay(other.gameObject, 0.02f, isBigZombie, bullet);
     }
     private void ReleaseZombieAfterDelay(GameObject zombie, float delay, bool isBigZombie,GameObject bullet)
     {

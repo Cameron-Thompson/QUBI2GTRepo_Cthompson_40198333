@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider playerDetectCollisions;
     private float shotCooldownModifier;
     public bool hasShield = false;
+    public GameObject hasShieldIndicator;
 
     void Start()
     {
@@ -94,12 +95,20 @@ public class PlayerMovement : MonoBehaviour
             forwardMovementSpeed = 30.0f * gameManager.difficultySelected;
         }
 
+        hasShieldIndicator.transform.position = transform.position + new Vector3(0,0,0);
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Zombie" || other.gameObject.tag == "BigZombie" && gameManager.isGameActive == true)
         {
+            if (hasShield == true)
+            {
+                hasShield = false;
+                hasShieldIndicator.gameObject.SetActive(false);
+                return;
+            }
             killPlayer();
             playerAnim.SetBool("DeadPlayerZombie_b", true);
         }
@@ -108,9 +117,11 @@ public class PlayerMovement : MonoBehaviour
             killPlayer();
             playerAnim.SetBool("DeadPlayerBarricade_b", true);
         }
+        
         if (other.gameObject.CompareTag("ShieldPowerup"))
         {
             hasShield = true;
+            hasShieldIndicator.gameObject.SetActive(true);
             Destroy(other.gameObject);
         }
     }
