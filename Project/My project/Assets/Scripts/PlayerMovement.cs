@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
     private BoxCollider playerDetectCollisions;
     private float shotCooldownModifier;
+    public bool hasShield = false;
 
     void Start()
     {
@@ -106,6 +107,11 @@ public class PlayerMovement : MonoBehaviour
         {
             killPlayer();
             playerAnim.SetBool("DeadPlayerBarricade_b", true);
+        }
+        if (other.gameObject.CompareTag("ShieldPowerup"))
+        {
+            hasShield = true;
+            Destroy(other.gameObject);
         }
     }
 

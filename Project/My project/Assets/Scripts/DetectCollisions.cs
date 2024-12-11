@@ -22,7 +22,7 @@ public class BoxCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet"))
+        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet") && !other.gameObject.CompareTag("ShieldPowerup"))
         {
             if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) )
             {
