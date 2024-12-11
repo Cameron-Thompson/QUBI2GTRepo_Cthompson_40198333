@@ -13,13 +13,16 @@ public class SpawnManager : MonoBehaviour
     // Spawn intervals in seconds
     private float spawnInterval = 0.2f;            // Adjust this value as needed
     private float spawnIntervalBarricade = 10.0f;  // Adjust this value as needed
+    private float spawnIntervalShieldPowerup = 10.0f;
 
     private float spawnTimer = 0f;
     private float spawnTimerBarricade = 0f;
+    private float spawnTimerShieldPowerup = 0f;
 
     public GameObject barricade;
     public GameObject zombie;
     public GameObject BigZombie;
+    public GameObject powerUpShield;
 
     private GameObject playerObj = null;
     private Animator playerAnim;
@@ -75,6 +78,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
         spawnTimerBarricade += Time.deltaTime;
+        spawnTimerShieldPowerup += Time.deltaTime;
 
         if (playerAnim.GetBool("DeadPlayer_b") == true || gameManager.isGameActive == false)
         {
@@ -92,6 +96,13 @@ public class SpawnManager : MonoBehaviour
             SpawnBarricade(playerObj.transform.position.z);
             spawnTimerBarricade = 0f;
         }
+
+        if (spawnTimerShieldPowerup >= spawnIntervalShieldPowerup * gameManager.difficultySelected/2)
+        {
+            SpawnShield(playerObj.transform.position.z);
+            spawnTimerShieldPowerup = 0f;
+        }
+
     }
 
     void SpawnZombie(float playerPositionZ)
@@ -137,5 +148,12 @@ public class SpawnManager : MonoBehaviour
         spawnPosZ = playerPositionZ + 300f;
         Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 0f, spawnPosZ);
         Instantiate(barricade, spawnPos, barricade.transform.rotation);
+    }
+
+    void SpawnShield(float playerPositionZ)
+    {
+        spawnPosZ = playerPositionZ + 300f;
+        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade+10, spawnRangeXBarricade-10), 8f, spawnPosZ);
+        Instantiate(powerUpShield, spawnPos, powerUpShield.transform.rotation);
     }
 }

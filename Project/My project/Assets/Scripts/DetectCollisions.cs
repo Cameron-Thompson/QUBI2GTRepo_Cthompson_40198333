@@ -66,7 +66,10 @@ public class BoxCollider : MonoBehaviour
     }
     private void ReleaseZombieAfterDelay(GameObject zombie, float delay, bool isBigZombie,GameObject bullet)
     {
-        StartCoroutine(ReleaseAfterDelayCoroutine(zombie, delay, isBigZombie,bullet));
+        if (zombie.activeSelf == true)
+        {
+           StartCoroutine(ReleaseAfterDelayCoroutine(zombie, delay, isBigZombie, bullet));
+        }
     }
 
     private IEnumerator ReleaseAfterDelayCoroutine(GameObject zombie, float delay, bool isBigZombie, GameObject bullet)
