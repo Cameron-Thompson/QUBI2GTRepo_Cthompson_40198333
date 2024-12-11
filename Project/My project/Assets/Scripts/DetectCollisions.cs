@@ -27,6 +27,9 @@ public class BoxCollider : MonoBehaviour
             if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) )
             {
                 //release into pool and stops zombie on zombie collissions
+                if(gameObject.activeSelf == false) {
+                    return;
+                }
                 spawnManager.bigZombiesPool.Release(gameObject);
                 spawnManager.zombiesPool.Release(other.gameObject);
                 return;

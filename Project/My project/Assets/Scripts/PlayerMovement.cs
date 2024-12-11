@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastShotTime = 0f;  // Tracks the time of the last shot
     public float forwardMovementSpeed = 20.0f;
     public ParticleSystem muzzleFlash;
+    private ParticleSystem bloodEffect;
     private Animator playerAnim;
     public AudioClip gameOver;
     public AudioClip gunShot;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        bloodEffect = GetComponent<ParticleSystem>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         Debug.Log(playerAnim != null ? "Animator assigned" : "Animator is null");
@@ -97,23 +99,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Zombie" || other.gameObject.tag == "BigZombie" && gameManager.isGameActive == true)
         {
-            horizontalSpeed = 0;
-            gameManager.isGameActive = false;
-            gameObject.GetComponent<Collider>().enabled = false;
-            playerAudio.Stop();
-            playerAudio.PlayOneShot(gameOver,1.0f);
-            playerAnim.SetBool("DeadPlayer_b", true);
+            killPlayer();
             playerAnim.SetBool("DeadPlayerZombie_b", true);
         }
         else if (other.gameObject.tag == "Barricade")
         {
-            horizontalSpeed = 0;
-            gameManager.isGameActive = false;
-            gameObject.GetComponent<Collider>().enabled = false;
-            playerAudio.Stop();
-            playerAudio.PlayOneShot(gameOver);
-            playerAnim.SetBool("DeadPlayer_b", true);
+            killPlayer();
             playerAnim.SetBool("DeadPlayerBarricade_b", true);
         }
+    }
+
+    private void killPlayer()
+    {
+        horizontalSpeed = 0;
+        gameManager.isGameActive = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+        bloodEffect.Play();
+        playerAudio.Stop();
+        playerAudio.PlayOneShot(gameOver, 1.0f);
+        playerAnim.SetBool("DeadPlayer_b", true);
     }
 }
