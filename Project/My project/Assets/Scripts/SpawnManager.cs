@@ -10,19 +10,23 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeXBarricade = 30f;
     private float spawnPosZ;
 
-    // Spawn intervals in seconds
     private float spawnInterval = 0.2f;            // Adjust this value as needed
     private float spawnIntervalBarricade = 10.0f;  // Adjust this value as needed
-    private float spawnIntervalShieldPowerup = 5.0f;
+    private float spawnIntervalShieldPowerup = 10.0f;
+    private float spawnIntervalAmmoPowerup = 15.0f;
+
 
     private float spawnTimer = 0f;
     private float spawnTimerBarricade = 0f;
     private float spawnTimerShieldPowerup = 0f;
+    private float spawnTimerAmmoPowerup = 0f;
+
 
     public GameObject barricade;
     public GameObject zombie;
     public GameObject BigZombie;
     public GameObject powerUpShield;
+    public GameObject powerUpAmmo;
 
     private GameObject playerObj = null;
     private Animator playerAnim;
@@ -41,6 +45,10 @@ public class SpawnManager : MonoBehaviour
         }, z => {
             z.SetActive(true);
         }, z => {
+            if (z.activeSelf == false)
+            {
+                return;
+            }
             z.SetActive(false);
         }, z => {
             Destroy(z);
@@ -97,12 +105,17 @@ public class SpawnManager : MonoBehaviour
             spawnTimerBarricade = 0f;
         }
 
-        if (spawnTimerShieldPowerup >= spawnIntervalShieldPowerup * gameManager.difficultySelected/2)
+        if (spawnTimerShieldPowerup >= spawnIntervalShieldPowerup)
         {
             SpawnShield(playerObj.transform.position.z);
             spawnTimerShieldPowerup = 0f;
         }
 
+        if (spawnTimerAmmoPowerup >= spawnIntervalAmmoPowerup)
+        {
+            SpawnAmmoUp(playerObj.transform.position.z);
+            spawnTimerAmmoPowerup = 0f;
+        }
     }
 
     void SpawnZombie(float playerPositionZ)
@@ -155,5 +168,12 @@ public class SpawnManager : MonoBehaviour
         spawnPosZ = playerPositionZ + 300f;
         Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade+10, spawnRangeXBarricade-10), 8f, spawnPosZ);
         Instantiate(powerUpShield, spawnPos, powerUpShield.transform.rotation);
+    }
+
+    void SpawnAmmoUp(float playerPositionZ)
+    {
+        spawnPosZ = playerPositionZ + 300f;
+        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade + 10, spawnRangeXBarricade - 10), 8f, spawnPosZ);
+        Instantiate(powerUpAmmo, spawnPos, powerUpAmmo.transform.rotation);
     }
 }

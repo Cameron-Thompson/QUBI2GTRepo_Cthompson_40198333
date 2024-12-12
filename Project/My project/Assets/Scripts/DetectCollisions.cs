@@ -22,7 +22,7 @@ public class BoxCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet") && !other.gameObject.CompareTag("ShieldPowerup"))
+        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Barricade") && !other.gameObject.CompareTag("Bullet") && !other.gameObject.CompareTag("ShieldPowerup") && !other.gameObject.CompareTag("BulletPowerUp"))
         {
             if ((gameObject.CompareTag("BigZombie") && other.gameObject.CompareTag("Zombie")) )
             {
@@ -76,13 +76,16 @@ public class BoxCollider : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (isBigZombie)
+        if (zombie.activeSelf == true)
         {
-            spawnManager.bigZombiesPool.Release(zombie);
-        }
-        else
-        {
-            spawnManager.zombiesPool.Release(zombie);
+            if (isBigZombie)
+            {
+                spawnManager.bigZombiesPool.Release(zombie);
+            }
+            else
+            {
+                spawnManager.zombiesPool.Release(zombie);
+            }
         }
         Destroy(bullet);
     }

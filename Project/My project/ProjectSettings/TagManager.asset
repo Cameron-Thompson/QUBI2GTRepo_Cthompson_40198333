@@ -10,6 +10,7 @@ TagManager:
   - Barricade
   - BigZombie
   - ShieldPowerup
+  - BulletPowerUp
   layers:
   - Default
   - TransparentFX

@@ -24,7 +24,10 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider playerDetectCollisions;
     private float shotCooldownModifier;
     public bool hasShield = false;
+    public bool hasAmmoUp = false;
     public GameObject hasShieldIndicator;
+    public GameObject hasAmmoUpIndicator;
+
 
     void Start()
     {
@@ -73,7 +76,23 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 bulletVector = new Vector3(transform.position.x+1.2f, transform.position.y + 7, transform.position.z + 5);
             playerAudio.PlayOneShot(gunShot, 0.5f);
-            Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
+            if (hasAmmoUp)
+            {
+                Vector3 bulletVector2 = new Vector3(transform.position.x + 3.2f, transform.position.y + 7, transform.position.z + 5);
+                Vector3 bulletVector3 = new Vector3(transform.position.x - 1.2f, transform.position.y + 7, transform.position.z + 5);
+                Vector3 bulletVector4 = new Vector3(transform.position.x + 5.2f, transform.position.y + 7, transform.position.z + 5);
+                Vector3 bulletVector5 = new Vector3(transform.position.x - 3.2f, transform.position.y + 7, transform.position.z + 5);
+
+                Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
+                Instantiate(projectilePrefab, bulletVector2, projectilePrefab.transform.rotation);
+                Instantiate(projectilePrefab, bulletVector3, projectilePrefab.transform.rotation);
+                Instantiate(projectilePrefab, bulletVector4, projectilePrefab.transform.rotation);
+                Instantiate(projectilePrefab, bulletVector5, projectilePrefab.transform.rotation);
+            }
+            else
+            {
+               Instantiate(projectilePrefab, bulletVector, projectilePrefab.transform.rotation);
+            }
             muzzleFlash.Play();
 
 
@@ -95,8 +114,8 @@ public class PlayerMovement : MonoBehaviour
             forwardMovementSpeed = 30.0f * gameManager.difficultySelected;
         }
 
-        hasShieldIndicator.transform.position = transform.position + new Vector3(0,0,0);
-
+        hasShieldIndicator.transform.position = transform.position + new Vector3(0,1,0);
+        hasAmmoUpIndicator.transform.position = transform.position + new Vector3(0,0,0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -124,6 +143,14 @@ public class PlayerMovement : MonoBehaviour
             hasShieldIndicator.gameObject.SetActive(true);
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("BulletPowerUp"))
+        {
+            hasAmmoUp = true;
+            hasAmmoUpIndicator.gameObject.SetActive(true);
+            Destroy(other.gameObject);
+        }
+
     }
 
     private void killPlayer()
