@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnim;
     public AudioClip gameOver;
     public AudioClip gunShot;
+    public AudioClip pickupShield;
+    public AudioClip pickupAmmo;
+
     private AudioSource playerAudio;
     private float Xboundary = 40;
     public static int deadZombies = 0;
@@ -103,15 +106,19 @@ public class PlayerMovement : MonoBehaviour
         if (playerAnim.GetBool("DeadPlayer_b") == true)
         {
             forwardMovementSpeed = 0;
-            gameOverScreen.Setup(gameManager.zombiesKilledCount,gameManager.points);
+            gameOverScreen.Setup(gameManager.zombiesKilledCount, gameManager.points);
         }
         else if (gameManager.isGameActive == false)
         {
             forwardMovementSpeed = 0;
         }
-        else if (gameManager.isGameActive == true)
+        else if (gameManager.isGameActive == true && (gameManager.difficultySelected == 2 || gameManager.difficultySelected == 3))
         {
             forwardMovementSpeed = 30.0f * gameManager.difficultySelected;
+        }
+        else
+        {
+            forwardMovementSpeed = 45.0f;
         }
 
         hasShieldIndicator.transform.position = transform.position + new Vector3(0,1,0);
@@ -142,12 +149,15 @@ public class PlayerMovement : MonoBehaviour
             hasShield = true;
             hasShieldIndicator.gameObject.SetActive(true);
             Destroy(other.gameObject);
+            playerAudio.PlayOneShot(pickupShield,2.5f);
+            StartCoroutine(DisableAmmoUpAfterDelay(5f));
         }
 
         if (other.gameObject.CompareTag("BulletPowerUp"))
         {
             hasAmmoUp = true;
             hasAmmoUpIndicator.gameObject.SetActive(true);
+            playerAudio.PlayOneShot(pickupAmmo, 2.5f);
             Destroy(other.gameObject);
         }
 
@@ -162,5 +172,12 @@ public class PlayerMovement : MonoBehaviour
         playerAudio.Stop();
         playerAudio.PlayOneShot(gameOver, 1.0f);
         playerAnim.SetBool("DeadPlayer_b", true);
+    }
+
+    private IEnumerator DisableAmmoUpAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        hasAmmoUp = false;
+        hasAmmoUpIndicator.SetActive(false);
     }
 }

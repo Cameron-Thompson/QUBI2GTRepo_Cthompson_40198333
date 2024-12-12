@@ -11,9 +11,9 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosZ;
 
     private float spawnInterval = 0.2f;            // Adjust this value as needed
-    private float spawnIntervalBarricade = 10.0f;  // Adjust this value as needed
-    private float spawnIntervalShieldPowerup = 10.0f;
-    private float spawnIntervalAmmoPowerup = 15.0f;
+    private float spawnIntervalBarricade = 5.0f;  // Adjust this value as needed
+    private float spawnIntervalShieldPowerup = 7.0f;
+    private float spawnIntervalAmmoPowerup = 8.0f;
 
 
     private float spawnTimer = 0f;
@@ -61,6 +61,10 @@ public class SpawnManager : MonoBehaviour
         }, bz => {
             bz.SetActive(true);
         }, bz => {
+            if (bz.activeSelf == false)
+            {
+                return;
+            }
             bz.SetActive(false);
         }, bz => {
             Destroy(bz);
@@ -87,6 +91,7 @@ public class SpawnManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         spawnTimerBarricade += Time.deltaTime;
         spawnTimerShieldPowerup += Time.deltaTime;
+        spawnTimerAmmoPowerup += Time.deltaTime;
 
         if (playerAnim.GetBool("DeadPlayer_b") == true || gameManager.isGameActive == false)
         {
@@ -166,14 +171,14 @@ public class SpawnManager : MonoBehaviour
     void SpawnShield(float playerPositionZ)
     {
         spawnPosZ = playerPositionZ + 300f;
-        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade+10, spawnRangeXBarricade-10), 8f, spawnPosZ);
+        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 8f, spawnPosZ);
         Instantiate(powerUpShield, spawnPos, powerUpShield.transform.rotation);
     }
 
     void SpawnAmmoUp(float playerPositionZ)
     {
         spawnPosZ = playerPositionZ + 300f;
-        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade + 10, spawnRangeXBarricade - 10), 8f, spawnPosZ);
+        Vector3 spawnPos = new(Random.Range(-spawnRangeXBarricade, spawnRangeXBarricade), 8f, spawnPosZ);
         Instantiate(powerUpAmmo, spawnPos, powerUpAmmo.transform.rotation);
     }
 }

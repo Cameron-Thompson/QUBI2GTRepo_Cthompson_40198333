@@ -1194,7 +1194,7 @@ MonoBehaviour:
   zombie: {fileID: 5248044391638715078, guid: 322d5bd9cbafd784883c298c0f15a150, type: 3}
   BigZombie: {fileID: 5248044391638715078, guid: 7f07e1427c87d0744bf23dd97681ddf1, type: 3}
   powerUpShield: {fileID: 344854807380118710, guid: 18aedd600902bfc42b680ae6a92b4476, type: 3}
-  powerUpAmmo: {fileID: 0}
+  powerUpAmmo: {fileID: 6357439371779056283, guid: d377d56d8eece234c9e76dcc1011edc1, type: 3}
 --- !u!4 &434374256
 Transform:
   m_ObjectHideFlags: 0
@@ -2149,7 +2149,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: be886b9f78a4f46beb4c7bb0e377831a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.145
+  m_Volume: 0.078
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3318,13 +3318,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: be886b9f78a4f46beb4c7bb0e377831a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.179
+  m_Volume: 0.095
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 0
+  Priority: 218
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -8611,9 +8611,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5601036089067188820, guid: 924e772d99fea934f8c7dff7c622e78a, type: 3}
     - target: {fileID: 5555272273243118235, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
+      propertyPath: pickupAmmo
+      value: 
+      objectReference: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+    - target: {fileID: 5555272273243118235, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
       propertyPath: muzzleFlash
       value: 
       objectReference: {fileID: 354288848}
+    - target: {fileID: 5555272273243118235, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
+      propertyPath: pickupShield
+      value: 
+      objectReference: {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
     - target: {fileID: 5555272273243118235, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
       propertyPath: shotCooldown
       value: 0.5
