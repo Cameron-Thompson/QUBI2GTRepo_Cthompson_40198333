@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     // Spawn intervals in seconds
     private float spawnInterval = 0.2f;            // Adjust this value as needed
     private float spawnIntervalBarricade = 10.0f;  // Adjust this value as needed
-    private float spawnIntervalShieldPowerup = 10.0f;
+    private float spawnIntervalShieldPowerup = 5.0f;
 
     private float spawnTimer = 0f;
     private float spawnTimerBarricade = 0f;
