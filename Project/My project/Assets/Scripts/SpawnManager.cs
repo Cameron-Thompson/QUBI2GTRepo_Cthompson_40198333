@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 
     private float spawnInterval = 0.2f;            // Adjust this value as needed
     private float spawnIntervalBarricade = 5.0f;  // Adjust this value as needed
-    private float spawnIntervalShieldPowerup = 7.0f;
+    private float spawnIntervalShieldPowerup = 6.5f;
     private float spawnIntervalAmmoPowerup = 8.0f;
 
 
@@ -150,15 +150,13 @@ public class SpawnManager : MonoBehaviour
     private void SpawnZombie(Vector3 spawnPos)
     {
         GameObject pooledZombie = zombiesPool.Get();
-        pooledZombie.transform.position = spawnPos;
-        pooledZombie.transform.rotation = zombie.transform.rotation;
+        pooledZombie.transform.SetPositionAndRotation(spawnPos, zombie.transform.rotation);
     }
 
     private void SpawnBigZombie(Vector3 spawnPos)
     {
         GameObject pooledBigZombie = bigZombiesPool.Get();
-        pooledBigZombie.transform.position = spawnPos;
-        pooledBigZombie.transform.rotation = BigZombie.transform.rotation;
+        pooledBigZombie.transform.SetPositionAndRotation(spawnPos, BigZombie.transform.rotation);
     }
 
     void SpawnBarricade(float playerPositionZ)

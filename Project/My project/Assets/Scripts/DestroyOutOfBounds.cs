@@ -19,22 +19,22 @@ public class DestroyOutOfBounds : MonoBehaviour
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        if (transform.position.z > player.transform.position.z + offsetUpperBound && gameObject.tag == "Bullet")
+        if (transform.position.z > player.transform.position.z + offsetUpperBound && gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
         }
-        else if (outOfBoundsZombieBarricades() && gameObject.tag == "Zombie")
+        else if (outOfBoundsZombieBarricades() && gameObject.CompareTag("Zombie"))
         {
             spawnManager.zombiesPool.Release(gameObject);
         }
-        else if (outOfBoundsZombieBarricades() && gameObject.tag == "BigZombie") {
+        else if (outOfBoundsZombieBarricades() && gameObject.CompareTag("BigZombie")) {
             spawnManager.bigZombiesPool.Release(gameObject);
         }
-        else if (outOfBoundsZombieBarricades() && gameObject.tag == "Barricade")
+        else if (outOfBoundsZombieBarricades() && gameObject.CompareTag("Barricade"))
         {
             Destroy(gameObject);
         }
-        else if (transform.position.z < player.transform.position.z - offsetLowerBoundRoad && gameObject.tag == "Road")
+        else if (transform.position.z < player.transform.position.z - offsetLowerBoundRoad && gameObject.CompareTag("Road"))
         {
             Destroy(gameObject);
         }

@@ -51,11 +51,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Move the player forward
-        transform.Translate(Vector3.forward * Time.deltaTime * forwardMovementSpeed);
+        transform.Translate(forwardMovementSpeed * Time.deltaTime * Vector3.forward);
 
         // Get horizontal input and move the player horizontally
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * horizontalSpeed);
+        transform.Translate(horizontalInput * horizontalSpeed * Time.deltaTime * Vector3.right);
 
         if (transform.position.x < -Xboundary)
         {
@@ -127,18 +127,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Zombie" || other.gameObject.tag == "BigZombie" && gameManager.isGameActive == true)
+        if (other.gameObject.CompareTag("Zombie") || other.gameObject.CompareTag("BigZombie") && gameManager.isGameActive == true)
         {
             if (hasShield == true)
             {
                 hasShield = false;
-                hasShieldIndicator.gameObject.SetActive(false);
+                hasShieldIndicator.SetActive(false);
                 return;
             }
             killPlayer();
             playerAnim.SetBool("DeadPlayerZombie_b", true);
         }
-        else if (other.gameObject.tag == "Barricade")
+        else if (other.gameObject.CompareTag("Barricade"))
         {
             killPlayer();
             playerAnim.SetBool("DeadPlayerBarricade_b", true);
@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("ShieldPowerup"))
         {
             hasShield = true;
-            hasShieldIndicator.gameObject.SetActive(true);
+            hasShieldIndicator.SetActive(true);
             Destroy(other.gameObject);
             playerAudio.PlayOneShot(pickupShield,2.5f);
             StartCoroutine(DisableAmmoUpAfterDelay(5f));
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("BulletPowerUp"))
         {
             hasAmmoUp = true;
-            hasAmmoUpIndicator.gameObject.SetActive(true);
+            hasAmmoUpIndicator.SetActive(true);
             playerAudio.PlayOneShot(pickupAmmo, 2.5f);
             Destroy(other.gameObject);
         }

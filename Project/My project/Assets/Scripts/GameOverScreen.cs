@@ -10,7 +10,6 @@ public class GameOverScreen : MonoBehaviour
     public TextMeshProUGUI deadZombies;
     public TextMeshProUGUI points;
     public TextMeshProUGUI highScore;
-    private int highScoreVal = 0;
 
 
     public void Setup(int deadZombiesInt,int pointsInt)

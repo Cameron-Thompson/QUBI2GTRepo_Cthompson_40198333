@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class RepeatRoadWay : MonoBehaviour
 {
-    private Vector3 startPos;
-    private float repeatLength;
     public GameObject Road;
     private GameObject playerObj;
-    private float spawnPosZ;
     private float playerProgress;
     // Start is called before the first frame update
     void Start()
