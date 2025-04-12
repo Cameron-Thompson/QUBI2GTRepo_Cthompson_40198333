@@ -6,8 +6,8 @@ public class FollowPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
-    private Vector3 offset = new Vector3(0, 30, -15);
-    private Vector3 rotationOffset = new Vector3(41, 0, 0); // Camera's fixed rotation
+    private Vector3 offset = new Vector3(0, 8, 2);
+    private Vector3 rotationOffset = new Vector3(0, 0, 0); // Camera's fixed rotation
 
     void Start()
     {
