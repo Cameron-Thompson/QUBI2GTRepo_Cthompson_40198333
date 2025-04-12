@@ -38,6 +38,10 @@ public class DestroyOutOfBounds : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (outOfBoundsZombieBarricades() && (gameObject.CompareTag("BulletPowerUp") || gameObject.CompareTag("ShieldPowerup")))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private bool outOfBoundsZombieBarricades()

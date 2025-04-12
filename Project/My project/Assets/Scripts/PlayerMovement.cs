@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (gameManager.difficultySelected == 1)
         {
-            shotCooldownModifier = 1.5f;
+            shotCooldownModifier = 1.1f;
         }
         else
         {

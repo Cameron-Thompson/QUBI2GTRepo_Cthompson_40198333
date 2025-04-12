@@ -2558,7 +2558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "ZOMBEE RUNNERZ \n"
+  m_text: "ZOMBIE RUNNERZ \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8560,7 +8560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5088212321318351409, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.29
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 5088212321318351409, guid: bf2c22ea6b2117d4eb12f74d95ca178c, type: 3}
       propertyPath: m_LocalPosition.z

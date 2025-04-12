@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0439045, y: 0.9907008, z: 0.6462097}
+  m_LocalScale: {x: 1.5708675, y: 1.4156123, z: 0.6462097}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9094621179963793113}
@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694147559ab20a0479df7e5189de3045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodSplatter: {fileID: 3548588485384254794, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
 --- !u!114 &8223380678975382604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fff9201bd8a3b428ce758f37a37277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 300
 --- !u!65 &3401739798689924291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,8 +145,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8416928, y: 0.9719031, z: 2.1910875}
-  m_Center: {x: 0, y: -0.000000059604645, z: -0.4644562}
+  m_Size: {x: 1.3440075, y: 0.9719031, z: 2.5589728}
+  m_Center: {x: 0.028345896, y: -0.000000042105203, z: -0.41603896}
 --- !u!54 &1825995190541337491
 Rigidbody:
   m_ObjectHideFlags: 0

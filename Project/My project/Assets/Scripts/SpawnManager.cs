@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeXBarricade = 30f;
     private float spawnPosZ;
 
-    private float spawnInterval = 0.2f;            // Adjust this value as needed
+    private float spawnInterval = 2f;            // Adjust this value as needed
     private float spawnIntervalBarricade = 5.0f;  // Adjust this value as needed
     private float spawnIntervalShieldPowerup = 6.5f;
     private float spawnIntervalAmmoPowerup = 8.0f;
